@@ -17,7 +17,7 @@ function AddTask(props: {task: ITask[], setTask: any, setError: any, error: any}
     }
 
     return (
-        <div>
+        <>
             <h4 className="text-center">Agregar Tarea</h4>
             <form>
                 {props.error && <span className="text-danger">{props.error}</span>}
@@ -25,7 +25,7 @@ function AddTask(props: {task: ITask[], setTask: any, setError: any, error: any}
                 onChange={e => setNewTask({id: GenerateId(), taskName: e.target.value})} value={newTask.taskName}/>
                 <button className="form-control btn btn-dark" type="submit" onClick= {NewTask}>Agregar</button>
             </form>
-        </div>
+        </>
     )
 }
 

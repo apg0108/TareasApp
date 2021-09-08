@@ -8,7 +8,7 @@ function TaskList(props: { task: ITask[], deleteTask: any, editTask: any}) {
         props.editTask(id);
     };    
   return (
-    <div>
+    <>
       <h4 className="text-center">Lista de Tareas</h4>
         <ul>
         {
@@ -24,7 +24,7 @@ function TaskList(props: { task: ITask[], deleteTask: any, editTask: any}) {
           );
         }))}
         </ul>
-    </div>
+    </>
   );
 }
 

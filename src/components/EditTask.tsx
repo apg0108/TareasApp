@@ -22,7 +22,7 @@ function EditTask(props: {task: ITask, allTask: ITask[], setTask: any, setEnable
         event.preventDefault();
     }
     return (
-        <div>
+        <>
              <h4 className="text-center">Editar Tarea</h4>
             <form>
                 {props.error && <span className="text-danger">{props.error}</span>}
@@ -31,7 +31,7 @@ function EditTask(props: {task: ITask, allTask: ITask[], setTask: any, setEnable
                 <button className="form-control btn btn-warning mb-2" type="submit" onClick={EditTask}>Editar</button>
                 <button className="form-control btn btn-secondary" onClick={Cancel}>Cancelar</button>
             </form>
-        </div>
+        </>
     )
 }
 
