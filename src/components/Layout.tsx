@@ -1,5 +1,4 @@
-/* eslint-disable array-callback-return */
-import { useState } from "react";
+import React from "react";
 import AddTask from "./AddTask";
 import TaskList from "./TaskList";
 import EditTask from "./EditTask";
@@ -9,10 +8,10 @@ function Layout() {
     const initialSingleTask : ITask = {id: '', taskName: ''};
     const initialTask : ITask [] = [];
 
-    const [task, setTask] = useState(initialTask);
-    const [enabledEdit, setEnabledEdit] = useState(false);
-    const [singleTask, setSingleTask] = useState(initialSingleTask);
-    const [error, setError] = useState(null);
+    const [task, setTask] = React.useState(initialTask);
+    const [enabledEdit, setEnabledEdit] = React.useState(false);
+    const [singleTask, setSingleTask] = React.useState(initialSingleTask);
+    const [error, setError] = React.useState(null);
    
     function DeleteTask(id : string) {
         const items = task.filter(item => item.id !== id);
@@ -20,13 +19,11 @@ function Layout() {
     };
 
     function Edit(id: string) {
-        setEnabledEdit(true);  
-        task.map(item => {
-            if (item.id === id){
-                setSingleTask({id: item.id, taskName: item.taskName});
-                return;
-            }                
-        });              
+      setEnabledEdit(true);
+      task.filter(f => f.id === id).map(item => {
+          setSingleTask({ id: item.id, taskName: item.taskName });
+          return null;
+        });
     }
     return (
         <div className="container">
