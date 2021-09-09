@@ -1,27 +1,28 @@
 import React from "react";
-import AddTask from "./AddTask";
-import TaskList from "./TaskList";
-import EditTask from "./EditTask";
-import { ITask } from "shared/ITask";
+import UsersList from "./UsersList";
+import EditUser from "./EditUser";
+import { IUser } from "shared/IUser";
+import AddUser from "./AddUser";
 
 function Layout() {
-    const initialSingleTask : ITask = {id: '', taskName: ''};
-    const initialTask : ITask [] = [];
+    const initialSingleUser : IUser = {id: '', name: '', email: ''};
+    const initialUser : IUser [] = [];
 
-    const [task, setTask] = React.useState(initialTask);
+    const [user, setUser] = React.useState(initialUser);
     const [enabledEdit, setEnabledEdit] = React.useState(false);
-    const [singleTask, setSingleTask] = React.useState(initialSingleTask);
+    const [singleUser, setSingleUser] = React.useState(initialSingleUser);
     const [error, setError] = React.useState(null);
    
-    function DeleteTask(id : string) {
-        const items = task.filter(item => item.id !== id);
-        setTask(items);
+    function DeleteUser(id : string) {
+        const items = user.filter(item => item.id !== id);
+        setUser(items);
     };
 
     function Edit(id: string) {
-      setEnabledEdit(true);
-      task.filter(f => f.id === id).map(item => {
-          setSingleTask({ id: item.id, taskName: item.taskName });
+      setEnabledEdit(true);      
+      setError(null);
+      user.filter(f => f.id === id).map(item => {
+          setSingleUser({ id: item.id, name: item.name, email: item.email });
           return null;
         });
     }
@@ -29,12 +30,12 @@ function Layout() {
         <div className="container">
             <div className="row">
                 <div className="col-9">
-                    <TaskList task={task} deleteTask={DeleteTask} editTask={Edit}/>
+                    <UsersList user={user} deleteUser={DeleteUser} editUser={Edit} enabledEdit={enabledEdit}/>
                 </div>
                 <div className="col-3">
-                    {enabledEdit ? <EditTask task={singleTask} allTask={task} setTask={setTask} setEnabledEdit={setEnabledEdit} 
+                    {enabledEdit ? <EditUser user={singleUser} allUsers={user} setUser={setUser} setEnabledEdit={setEnabledEdit} 
                     setError={setError} error={error}/> 
-                    : <AddTask setTask={setTask} task={task} setError={setError} error={error}/>}
+                    : <AddUser setUser={setUser} user={user} setError={setError} error={error}/>}
                 </div>
             </div>
         </div>
