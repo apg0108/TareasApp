@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IUser } from "shared/IUser";
 
 function EditUser(props: {user: IUser, allUsers: IUser[], setUser: any, setEnabledEdit: any, setError: any, error: any}) {
-    const initialUser : IUser = {id: '', name: '', email: ''};
+    const initialUser : IUser = {name: '', email: ''};
     const [editUser, setEditUser] = useState(props.user ?? initialUser);        
 
     function EditUser(event: any) {
@@ -10,14 +10,14 @@ function EditUser(props: {user: IUser, allUsers: IUser[], setUser: any, setEnabl
            const userNoEditable = props.allUsers.filter(items => items.id !== props.user.id);
            const newUserEdit : IUser = {id: props.user.id, name: editUser.name, email: editUser.email};
            props.setUser([...userNoEditable, newUserEdit]);
-           setEditUser({id: '', name: '', email: ''});
+           setEditUser({name: '', email: ''});
            props.setEnabledEdit(false);
            props.setError(null);
         } else props.setError('Introduzca un usuario por favor');             
         event.preventDefault();
     }
     function Cancel(event: any) {
-        setEditUser({id: '', name: '', email: ''});
+        setEditUser({name: '', email: ''});
         props.setEnabledEdit(false);
         props.setError(null);
         event.preventDefault();

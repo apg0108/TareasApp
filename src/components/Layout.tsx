@@ -5,22 +5,32 @@ import { IUser } from "shared/IUser";
 import AddUser from "./AddUser";
 
 function Layout() {
-    const initialSingleUser : IUser = {id: '', name: '', email: ''};
+    const initialSingleUser : IUser = {name: '', email: ''};
     const initialUser : IUser [] = [];
 
     const [user, setUser] = React.useState(initialUser);
     const [enabledEdit, setEnabledEdit] = React.useState(false);
     const [singleUser, setSingleUser] = React.useState(initialSingleUser);
     const [error, setError] = React.useState(null);
+    
+    async function GetUsers(){
+        const data = await fetch('https://jsonplaceholder.typicode.com/users').then(resp => resp.json());    
+        setUser(data); 
+    };
+    
+    React.useEffect(()=>{
+        GetUsers();
+    }, []);
    
-    function DeleteUser(id : string) {
+    function DeleteUser(id : number) {
         const items = user.filter(item => item.id !== id);
         setUser(items);
     };
 
-    function Edit(id: string) {
+    function Edit(id: number) {
       setEnabledEdit(true);      
-      setError(null);
+      setError(null);     
+
       user.filter(f => f.id === id).map(item => {
           setSingleUser({ id: item.id, name: item.name, email: item.email });
           return null;
