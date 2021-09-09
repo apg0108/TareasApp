@@ -19,7 +19,12 @@ function Layout() {
     };
     
     React.useEffect(()=>{
-        GetUsers();
+        try {
+            GetUsers();
+        }
+        catch (error) {
+           console.log(error);     
+        }
     }, []);
    
     function DeleteUser(id : number) {
@@ -29,12 +34,10 @@ function Layout() {
 
     function Edit(id: number) {
       setEnabledEdit(true);      
-      setError(null);     
-
-      user.filter(f => f.id === id).map(item => {
-          setSingleUser({ id: item.id, name: item.name, email: item.email });
-          return null;
-        });
+      setError(null);
+      user.filter(f => f.id === id).map(item => (
+          setSingleUser({ id: item.id, name: item.name, email: item.email })
+      ));
     }
     return (
         <div className="container">
